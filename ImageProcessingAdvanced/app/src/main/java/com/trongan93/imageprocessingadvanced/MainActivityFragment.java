@@ -29,7 +29,7 @@ import com.trongan93.imageprocessingadvanced.ImageProcessing.HistogramProcess;
  */
 public class MainActivityFragment extends Fragment {
     Button btnGallery;
-    ImageView sourceImage, hstImage;
+    ImageView sourceImage, resultImage;
     Activity mActivity;
     private static int IMG_RESULT = 1;
     String ImageDecode;
@@ -47,7 +47,7 @@ public class MainActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         btnGallery = (Button)view.findViewById(R.id.btnLoadImage);
         sourceImage = (ImageView)view.findViewById(R.id.imgSource);
-        hstImage = (ImageView)view.findViewById(R.id.imgHistogram);
+        resultImage = (ImageView)view.findViewById(R.id.imgResult);
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,15 +77,20 @@ public class MainActivityFragment extends Fragment {
                 sourceImage.setImageBitmap(bitmapSourceImage);
                 Log.d("trongan93","Success set Image Bitmap");
 
-//                Histogram
+
                 //    Image Processing with OpenCV
                 rgba = new Mat();
                 Utils.bitmapToMat(bitmapSourceImage, rgba);
+                //    Histogram
                 Size rgbaSize = rgba.size();
-
                 HistogramProcess histogramProcess = new HistogramProcess(rgba,rgbaSize);
                 Bitmap hstBitmap = histogramProcess.GetBitMap();
-                hstImage.setImageBitmap(hstBitmap);
+
+                //     Morphological
+                
+
+
+                resultImage.setImageBitmap(hstBitmap);
             }
         }
         catch (Exception e){

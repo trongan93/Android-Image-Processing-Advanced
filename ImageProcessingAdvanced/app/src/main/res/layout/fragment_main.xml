@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:srcCompat="@android:color/transparent"
-                android:id="@+id/imgHistogram"
+                android:id="@+id/imgResult"
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
