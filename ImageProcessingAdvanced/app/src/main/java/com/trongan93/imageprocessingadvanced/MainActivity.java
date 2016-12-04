@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!OpenCVLoader.initDebug()) {
             // Handle initialization error
-            Log.d("trongan93","Can't load OpenCV");
+            Log.e("trongan93","Can't load OpenCV");
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

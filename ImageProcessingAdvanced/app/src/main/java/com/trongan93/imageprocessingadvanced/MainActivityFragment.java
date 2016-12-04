@@ -18,10 +18,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.trongan93.imageprocessingadvanced.ImageProcessing.MorphologicalProcess;
 import com.trongan93.imageprocessingadvanced.util.StorgeProcessing;
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
+
 import com.trongan93.imageprocessingadvanced.ImageProcessing.HistogramProcess;
 
 /**
@@ -34,6 +37,8 @@ public class MainActivityFragment extends Fragment {
     private static int IMG_RESULT = 1;
     String ImageDecode;
     Mat rgba;
+    Bitmap resultBitmap;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,18 +87,21 @@ public class MainActivityFragment extends Fragment {
                 rgba = new Mat();
                 Utils.bitmapToMat(bitmapSourceImage, rgba);
                 //    Histogram
-                Size rgbaSize = rgba.size();
-                HistogramProcess histogramProcess = new HistogramProcess(rgba,rgbaSize);
-                Bitmap hstBitmap = histogramProcess.GetBitMap();
+//                Size rgbaSize = rgba.size();
+//                HistogramProcess histogramProcess = new HistogramProcess(rgba,rgbaSize);
+//                resultBitmap  = histogramProcess.GetBitMap();
 
                 //     Morphological
-                
+                MorphologicalProcess morphologicalProcess = new MorphologicalProcess(rgba);
+                morphologicalProcess.Process();
+                resultBitmap = morphologicalProcess.GetBitMap();
 
 
-                resultImage.setImageBitmap(hstBitmap);
+                resultImage.setImageBitmap(resultBitmap);
             }
         }
         catch (Exception e){
+            Log.e("trongan93", "MainActivityFragment: " + e);
             Toast.makeText(mActivity, "Please try again", Toast.LENGTH_LONG).show();
         }
     }
